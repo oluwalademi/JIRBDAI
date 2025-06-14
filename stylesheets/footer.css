@@ -1,0 +1,85 @@
+.container,
+.container * {
+  box-sizing: border-box;
+}
+.container {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px 0px 0px 0px;
+  padding: 20px 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: fit-content;
+  position: relative;
+}
+.middle-container {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  flex: 1;
+}
+.header-link {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.journal {
+  color: #4d4d4f;
+  text-align: left;
+  font-family: "RobotoFlex-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+}
+.final-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  flex: 1;
+  align-items: flex-end;     
+  justify-content: flex-end;
+}
+.btn-container {
+  background: #2c526f;
+  border-radius: 8px;
+  padding: 8px 4px 8px 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  aspect-ratio: 1;
+}
+.icon {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+  object-fit: cover;
+}

@@ -1,0 +1,72 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images/publisher-icon.png" type="image/png">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&amp;family=Roboto:wght@300&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link rel="stylesheet" href="../stylesheets/header.css">
+    </head>
+
+<body class="body">
+  <header id="header-pane" class="header">
+    <div class="initial-container">
+        <a href="../index.html" class="clickable-div" target="_top">
+          <img class="user-pics" src="../images/jirbdai.png" />
+        </a>
+    </div>
+    <div class="final-container">
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Browse</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">About</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Sign in</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">
+            <div style="color: 00C8FF;" class="blue-btn">Register</div>
+        </a>
+    </div>
+  </header>
+  <div class="sub-header">
+    <div style="padding: 0px 20px;" class="final-container">
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Homepage</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Editorial Team</a>
+        <a class="nav-bar-link" href="https://jirbdai.com.ng/index.php/jirbdai/issue/archive" target="_top">Publications</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Journal Policies</a>
+        <a class="nav-bar-link" href="../pages/about.html" target="_top">Conference</a>
+    </div>
+    <div class="initial-container">
+        <div class="initial-container">
+            <div style="padding: 4px 32px; font-size: 16px; font-weight: 600; color: rgba(255, 255, 255, 0.527); " 
+                class="blue-btn">
+                Search JIRBDAI Library
+                <img class="search-pics" src="../images/search-pics.png"/>
+            </div>
+            
+        </div>
+
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+<script>
+  let lastScrollY = window.scrollY;
+  const header = document.querySelector(".header");
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+      // Scrolling down
+      header.classList.add("hidden");
+    } else {
+      // Scrolling up
+      header.classList.remove("hidden");
+    }
+
+    lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+  });
+</script>
