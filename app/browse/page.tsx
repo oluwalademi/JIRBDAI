@@ -57,6 +57,17 @@ const page = async ({ searchParams }: PageProps) => {
     ),
   );
 
+  const authorsWithInstitutions = fetchArticles.flatMap(
+    (article: any) =>
+      article.authors.map((author: any) => ({
+        name: author.fullName,
+        institutions:
+          author.affiliations?.map((aff: any) => aff.name?.en) || [],
+      })) || [],
+  );
+
+  console.log(authorsWithInstitutions, "affiliations");
+
   return (
     <div className="default-layout">
       <header>
@@ -64,13 +75,23 @@ const page = async ({ searchParams }: PageProps) => {
       </header>
       <Offset height={160} color={"brand-white"} />
       <section className="flex h-auto flex-row flex-wrap justify-between gap-10">
-        {path !== "/browse" && (
+        {!path === "/browse" && (
           <SidebarSection title={"Filter"}>
-            <div className="flex w-full flex-col text-black">
+            <div className="flex w-full flex-col gap-y-4 text-black">
+              <SubTopBar titleHeader={"Year"} />
+              <SubTopBar titleHeader={"Institution"} />
+              {authorsWithInstitutions.map((author: any, i: number) => (
+                <div key={i}>
+                  <strong>{author.name}</strong>
+                  <ul>
+                    {author.institutions.map((inst: string, j: number) => (
+                      <li key={j}>{inst}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
               {path}
-              <SubTopBar titleHeader={"Researchers"} />
-              <SubTopBar titleHeader={"Content Types"} />
-              <div> wake up</div>
             </div>
           </SidebarSection>
         )}

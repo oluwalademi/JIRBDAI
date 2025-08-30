@@ -2,6 +2,7 @@ import React from "react";
 
 type Props = {
   titleHeader: string;
+  paramsother?: string;
   tinyColor?: string;
   bigColor?: string;
   textColor?: string;

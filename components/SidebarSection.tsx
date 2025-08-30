@@ -28,7 +28,7 @@ const SidebarSection = ({
       className={`m-0 flex w-full min-w-[320px] flex-1 flex-col self-stretch md:w-[320px] ${flexStyle}`}
     >
       <TopBar titleHeader={title ?? "Section"} />
-      <div className={"bg-section mb-32 flex-col"}>
+      <div className={"bg-section mb-32 flex-col !p-1"}>
         {item?.map((unit) => (
           <a
             href={unit.url}
@@ -39,7 +39,7 @@ const SidebarSection = ({
             <div className={"w-full border-b-2 border-gray-400"}></div>
           </a>
         ))}
-        <div>{children || ""}</div>
+        <div className={"w-full"}>{children || ""}</div>
       </div>
     </div>
   );
