@@ -79,7 +79,7 @@ export const createOjsClient = () => {
           if (issueIds) params.issueIds = issueIds;
           if (searchPhrase) params.searchPhrase = searchPhrase;
 
-          return request(`/submissions`, { params });
+          return request(`/submissions?status=3`, { params });
         },
         get: (submissionId: number, publicationId: number) =>
           request(
