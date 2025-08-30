@@ -75,7 +75,7 @@ const page = async ({ searchParams }: PageProps) => {
       </header>
       <Offset height={160} color={"brand-white"} />
       <section className="flex h-auto flex-row flex-wrap justify-between gap-10">
-        {!path === "/browse" && (
+        {path !== "/browse" && (
           <SidebarSection title={"Filter"}>
             <div className="flex w-full flex-col gap-y-4 text-black">
               <SubTopBar titleHeader={"Year"} />
