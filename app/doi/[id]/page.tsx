@@ -215,7 +215,9 @@ export default async function Page({ params }: { params: { id: number } }) {
         <Offset height={40} color={"brand-white"} />
         <div>
           <TopBar titleHeader={"Abstract"} />
-          <p className={"mt-4 text-xl text-black/70"}>{cleanAbstract}</p>
+          <p className={"mt-4 text-xl text-black/70"}>
+            Updated {cleanAbstract}
+          </p>
         </div>
       </section>
       <Footer />

@@ -5,16 +5,13 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } },
 ) {
-  const { id } = await params;
+  const { id } = params;
 
   try {
-    // Fetch article data using the OJS client
     const article = await createOjsClient().submissions.get(
       Number(id),
       Number(id),
     );
-
-    // Get the PDF file URL from the article's galleys
     const pdfUrl =
       article.galleys[0]?.file?.url ||
       article.galleys[0]?.file?.revisions?.[0]?.url;
@@ -23,7 +20,7 @@ export async function GET(
       return NextResponse.json({ error: "File not found" }, { status: 404 });
     }
 
-    // Redirect to the actual file URL
+    // Direct redirect to public file URL (bypasses OJS auth)
     return NextResponse.redirect(pdfUrl);
   } catch (error) {
     console.error("Error fetching file:", error);
