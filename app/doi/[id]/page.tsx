@@ -7,7 +7,6 @@ import Offset from "@/components/header/Offset";
 import Image from "next/image";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
-// import { router } from "next/client";
 
 export async function generateMetadata({
   params,
@@ -80,6 +79,9 @@ export default async function Page({ params }: { params: { id: number } }) {
   const { id } = await params;
   const article = await createOjsClient().submissions.get(id, id);
   const cleanAbstract = stripHtml(article.abstract?.en || "").result;
+  const pdfUrl =
+    article.galleys[0]?.file?.url ||
+    article.galleys[0]?.file?.revisions?.[0]?.url;
 
   return (
     <main className="!default-layout container !mx-0 w-full !px-0 text-black">
@@ -104,26 +106,46 @@ export default async function Page({ params }: { params: { id: number } }) {
           className={"mt-5 flex self-stretch border-2 border-black/10"}
         ></div>
         {/* Button */}
-        <div className={"my-2 flex gap-2"}>
-          {/* 1st Button */}
-          <div className="relative flex h-10 items-center justify-center gap-2.5 rounded-[20px] bg-[#48c7af] px-2.5 py-3">
-            <Image src="/icon0.png" alt="icon" width={25} height={25} />
-            <div className="font-inter text-[14px] font-bold text-white">
-              Open Access
+        <div className={"my-2 flex justify-between"}>
+          <div className={"flex flex-row gap-2"}>
+            {/* 1st Button */}
+            <div className="relative flex h-10 items-center justify-center gap-2.5 rounded-[20px] bg-[#48c7af] px-2.5">
+              <Image
+                src="/assets/icons/open-access.svg"
+                alt="Open access"
+                width={22}
+                height={22}
+              />
+              <div className="font-inter text-[14px] font-bold text-white">
+                Open Access
+              </div>
+            </div>
+            {/* 2nd Button */}
+            <div className="relative  flex h-10 items-center justify-center gap-2.5 rounded-[20px] border-2 border-black/20 px-4 py-3 shadow">
+              <div className="font-inter text-[14px] font-bold text-black">
+                Research Article
+              </div>
             </div>
           </div>
-          {/* 2nd Button */}
-          <div className="relative  flex h-10 items-center justify-center gap-2.5 rounded-[20px] border-2 border-black/10 px-2.5 py-3 shadow">
-            <Image src="/icon0.png" alt="icon" width={25} height={25} />
-            <div className="font-inter text-[14px] font-bold text-black">
-              Research Article
+          {/* 3rd Button */}
+          <a href={pdfUrl}>
+            <div className="relative flex h-10 items-center justify-center gap-2.5 rounded-[20px] bg-[#fb5431] px-4">
+              <Image
+                src="/assets/icons/download-article-btn.svg"
+                alt="Open access"
+                width={22}
+                height={22}
+              />
+              <div className="font-inter text-[14px] font-bold text-white">
+                Download PDF
+              </div>
             </div>
-          </div>
+          </a>
         </div>
         {/* Button */}
 
         {/* 2nd */}
-        <div className="flex gap-3 self-stretch rounded-[1.25rem] border-2 border-black/10 px-5 py-4">
+        <div className="flex flex-wrap gap-3 self-stretch rounded-[1.25rem] border-2 border-black/10 px-5 py-4">
           {article.authors.map((author: any, i: number) => (
             <div
               key={i}
@@ -143,12 +165,12 @@ export default async function Page({ params }: { params: { id: number } }) {
           ))}
         </div>
         {/* 2nd */}
-        <div className="flex gap-3 self-stretch rounded-[1.25rem] border-2 border-black/10 px-5 py-4">
+        <div className="flex flex-wrap gap-3 self-stretch rounded-[1.25rem] border-2 border-black/10 px-5 py-4">
           <div className={"flex flex-row items-center gap-2"}>
             <div className="flex items-center justify-center gap-2.5 overflow-hidden rounded-[0.875rem] border border-black/100 shadow-[0_0.25rem_0.25rem_rgba(0,0,0,0.25)]">
               <Image
-                src="/rectangle-60.png"
-                alt="Rectangle"
+                src="/assets/icons/cite.svg"
+                alt="Cite btn"
                 width={45} // 2.8125rem ≈ 45px
                 height={45}
                 className="aspect-square object-cover shadow-[0_0.125rem_0.25rem_rgba(0,0,0,0.75)]"
@@ -156,8 +178,8 @@ export default async function Page({ params }: { params: { id: number } }) {
             </div>
             <div className="flex items-center justify-center gap-2.5 overflow-hidden rounded-[0.875rem] border border-black/100 shadow-[0_0.25rem_0.25rem_rgba(0,0,0,0.25)]">
               <Image
-                src="/rectangle-60.png"
-                alt="Rectangle"
+                src="/assets/icons/scan.svg"
+                alt="Read via reader"
                 width={45} // 2.8125rem ≈ 45px
                 height={45}
                 className="aspect-square object-cover shadow-[0_0.125rem_0.25rem_rgba(0,0,0,0.75)]"
@@ -198,10 +220,10 @@ export default async function Page({ params }: { params: { id: number } }) {
           <TopBar titleHeader={"Abstract"} />
           <p className={"mt-4 text-xl text-black/70"}>{cleanAbstract}</p>
         </div>
-        {/* <a href={`${article.galleys[0].file .url}`}>download</a> */}
+        <a href={`${article.galleys[0].file.url}`}>download</a>
         <a
           className="mt-4 inline-block text-blue-600 underline hover:text-blue-800"
-          href={`/doi/file/${article.galleys[0].file.submissionFileId}`}
+          href={`/doi/file/${article.id}`}
         >
           download PDF
         </a>
