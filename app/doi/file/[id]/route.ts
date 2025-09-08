@@ -1,92 +1,35 @@
-import { NextRequest, NextResponse } from "next/server";
-import { ojsConfig } from "@/lib/ojs/config";
+import { createOjsClient } from "@/lib/ojs";
+import { NextResponse } from "next/server";
 
 export async function GET(
-  _req: NextRequest,
+  request: Request,
   { params }: { params: { id: string } },
 ) {
+  const { id } = await params;
+
   try {
-    const { id } = await params;
+    // Fetch article data using the OJS client
+    const article = await createOjsClient().submissions.get(
+      Number(id),
+      Number(id),
+    );
 
-    // 1. Fetch submission details (to get its current publicationId)
-    const submissionUrl = `${ojsConfig.ojsUrl}/submissions/${id}`;
-    const submissionRes = await fetch(submissionUrl, {
-      headers: {
-        Authorization: `Bearer ${ojsConfig.ojsToken}`,
-      },
-    });
+    // Get the PDF file URL from the article's galleys
+    const pdfUrl =
+      article.galleys[0]?.file?.url ||
+      article.galleys[0]?.file?.revisions?.[0]?.url;
 
-    if (!submissionRes.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch submission metadata" },
-        { status: submissionRes.status },
-      );
+    if (!pdfUrl) {
+      return NextResponse.json({ error: "File not found" }, { status: 404 });
     }
 
-    const submission = await submissionRes.json();
-    const publicationId = submission?.currentPublicationId;
-    if (!publicationId) {
-      return NextResponse.json(
-        { error: "No publication found for this submission" },
-        { status: 404 },
-      );
-    }
-
-    // 2. Fetch publication details
-    const pubUrl = `${ojsConfig.ojsUrl}/submissions/${id}/publications/${publicationId}`;
-    const pubRes = await fetch(pubUrl, {
-      headers: {
-        Authorization: `Bearer ${ojsConfig.ojsToken}`,
-      },
-    });
-
-    if (!pubRes.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch publication metadata" },
-        { status: pubRes.status },
-      );
-    }
-
-    const article = await pubRes.json();
-    console.log(article, "article");
-
-    const fileUrl = article?.galleys[0]?.file?.url;
-
-    if (!fileUrl) {
-      return NextResponse.json(
-        { error: "No PDF file found in galleys" },
-        { status: 404 },
-      );
-    }
-
-    // 4. Fetch the actual PDF file
-    const fileRes = await fetch(fileUrl, {
-      headers: {
-        Authorization: `Bearer ${ojsConfig.ojsToken}`,
-      },
-    });
-
-    if (!fileRes.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch PDF file from OJS" },
-        { status: fileRes.status },
-      );
-    }
-
-    // 5. Stream the file back to the client
-    const fileBuffer = await fileRes.arrayBuffer();
-    const contentType =
-      fileRes.headers.get("Content-Type") || "application/pdf";
-
-    return new NextResponse(fileBuffer, {
-      headers: {
-        "Content-Type": contentType,
-        "Content-Disposition": `inline; filename="article-${id}.pdf"`,
-        "Cache-Control": "private, max-age=0, must-revalidate",
-      },
-    });
+    // Redirect to the actual file URL
+    return NextResponse.redirect(pdfUrl);
   } catch (error) {
-    console.error("Download error:", error);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error("Error fetching file:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

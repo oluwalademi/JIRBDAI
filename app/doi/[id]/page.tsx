@@ -79,9 +79,6 @@ export default async function Page({ params }: { params: { id: number } }) {
   const { id } = await params;
   const article = await createOjsClient().submissions.get(id, id);
   const cleanAbstract = stripHtml(article.abstract?.en || "").result;
-  const pdfUrl =
-    article.galleys[0]?.file?.url ||
-    article.galleys[0]?.file?.revisions?.[0]?.url;
 
   return (
     <main className="!default-layout container !mx-0 w-full !px-0 text-black">
@@ -128,7 +125,7 @@ export default async function Page({ params }: { params: { id: number } }) {
             </div>
           </div>
           {/* 3rd Button */}
-          <a href={pdfUrl}>
+          <a href={`/doi/file/${article.id}`}>
             <div className="relative flex h-10 items-center justify-center gap-2.5 rounded-[20px] bg-[#fb5431] px-4">
               <Image
                 src="/assets/icons/download-article-btn.svg"
@@ -220,13 +217,6 @@ export default async function Page({ params }: { params: { id: number } }) {
           <TopBar titleHeader={"Abstract"} />
           <p className={"mt-4 text-xl text-black/70"}>{cleanAbstract}</p>
         </div>
-        <a href={`${article.galleys[0].file.url}`}>download</a>
-        <a
-          className="mt-4 inline-block text-blue-600 underline hover:text-blue-800"
-          href={`/doi/file/${article.id}`}
-        >
-          download PDF
-        </a>
       </section>
       <Footer />
     </main>
