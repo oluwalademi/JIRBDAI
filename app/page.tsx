@@ -10,9 +10,7 @@ import Offset from "@/components/header/Offset";
 export default function Home() {
   return (
     <div className="default-layout">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={150} color={"brand-gradient"} />
       <HeroSection />
       <BibliometricsData />

@@ -70,9 +70,7 @@ const page = async ({ searchParams }: PageProps) => {
 
   return (
     <div className="default-layout">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={160} color={"brand-white"} />
       <section className="flex h-auto flex-row flex-wrap justify-between gap-10">
         {path !== "/browse" && (
