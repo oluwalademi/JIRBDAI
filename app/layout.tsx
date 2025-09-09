@@ -55,8 +55,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${roboto.variable} ${numans.variable} relative inset-x-0 w-full justify-items-center self-stretch  bg-white antialiased`}
       >
-        <Header />
-        <ZoomWrapper>{children}</ZoomWrapper>
+        <ZoomWrapper>
+          <Header />
+          {children}
+        </ZoomWrapper>
       </body>
     </html>
   );
