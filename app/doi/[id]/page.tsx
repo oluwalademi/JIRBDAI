@@ -113,7 +113,6 @@ export default async function Page({ params }: { params: { id: number } }) {
               className="hover:underline"
             >
               Issue {article.issueId}
-              http://localhost:3000/doi/4
             </Link>{" "}
             {"> "}
             <Link
