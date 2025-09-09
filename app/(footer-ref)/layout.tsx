@@ -6,9 +6,7 @@ import Footer from "@/components/Footer";
 const layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="default-layout">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={164} color={"brand-white"} />
       <div className="container">{children}</div>
       <Footer />

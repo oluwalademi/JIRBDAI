@@ -7,9 +7,7 @@ import Footer from "@/components/Footer";
 const page = () => {
   return (
     <div className="default-layout">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={160} color={"brand-white"} />
       <section className={"paper-issues !gap-6 !gap-y-10 !bg-white !bg-none"}>
         <div className={"flex flex-1 bg-black shadow-custom-2"}>

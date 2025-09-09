@@ -96,7 +96,7 @@ export default async function Page({ params }: { params: { id: number } }) {
   return (
     <main className="!default-layout container !mx-0 w-full !px-0 text-black">
       <div className="default-layout !mb-5 w-full !px-0">
-        <Header />
+        {/* <Header /> */}
         <Offset height={160} color={"brand-white"} />
         <div className="bg-black px-10 py-1 text-left text-white">
           <span className="text-justify text-white">

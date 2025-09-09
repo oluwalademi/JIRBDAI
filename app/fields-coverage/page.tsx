@@ -15,9 +15,7 @@ const Page = () => {
 
   return (
     <div className="default-layout">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={160} color={"brand-white"} />
 
       <div className={"container flex-col text-black"}>

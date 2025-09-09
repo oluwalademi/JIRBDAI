@@ -11,9 +11,7 @@ import Image from "next/image";
 const page = () => {
   return (
     <div className="default-layout ">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={160} color={"brand-white"} />
       <div className={"container mb-20"}>
         <TopBar titleHeader={"Editorial Policies"} />

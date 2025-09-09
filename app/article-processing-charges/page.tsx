@@ -7,9 +7,7 @@ import Image from "next/image";
 const page = () => {
   return (
     <div className="default-layout w-full self-stretch">
-      <header>
-        <Header />
-      </header>
+      <header></header>
       <Offset height={160} color={"brand-white"} />
       <section
         className={
