@@ -2,11 +2,12 @@ import { createOjsClient } from "@/lib/ojs";
 import { stripHtml } from "string-strip-html";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import React from "react";
 import Offset from "@/components/header/Offset";
 import Image from "next/image";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import CitationComponent from "@/components/CitationComponent";
+import CiteAndRead from "@/components/article/CiteAndRead";
 
 export async function generateMetadata({
   params,
@@ -163,26 +164,7 @@ export default async function Page({ params }: { params: { id: number } }) {
         </div>
         {/* 2nd */}
         <div className="flex flex-wrap gap-3 self-stretch rounded-[1.25rem] border-2 border-black/10 px-5 py-4">
-          <div className={"flex flex-row items-center gap-2"}>
-            <div className="flex items-center justify-center gap-2.5 overflow-hidden rounded-[0.875rem] border border-black/100 shadow-[0_0.25rem_0.25rem_rgba(0,0,0,0.25)]">
-              <Image
-                src="/assets/icons/cite.svg"
-                alt="Cite btn"
-                width={45} // 2.8125rem ≈ 45px
-                height={45}
-                className="aspect-square object-cover shadow-[0_0.125rem_0.25rem_rgba(0,0,0,0.75)]"
-              />
-            </div>
-            <div className="flex items-center justify-center gap-2.5 overflow-hidden rounded-[0.875rem] border border-black/100 shadow-[0_0.25rem_0.25rem_rgba(0,0,0,0.25)]">
-              <Image
-                src="/assets/icons/scan.svg"
-                alt="Read via reader"
-                width={45} // 2.8125rem ≈ 45px
-                height={45}
-                className="aspect-square object-cover shadow-[0_0.125rem_0.25rem_rgba(0,0,0,0.75)]"
-              />
-            </div>
-          </div>
+          <CiteAndRead mainarticle={article} />
           <div className={"h-1/2 bg-black px-1"}></div>
           <div className={"flex flex-col items-center gap-1"}>
             <div className="flex w-[21.625rem] items-center justify-start font-roboto text-base font-semibold text-[#202837]">
@@ -192,7 +174,7 @@ export default async function Page({ params }: { params: { id: number } }) {
               https://doi.org/10.5281/zenodo.15669953
             </div>
           </div>
-          <div className={"h-1/2 bg-black px-1"}></div>
+          <div className={"flex h-full bg-black px-1"}></div>
           <div className="r-ctn">
             <div className="view-container">
               <div className="stat-value">{article.datePublished}</div>
@@ -215,9 +197,7 @@ export default async function Page({ params }: { params: { id: number } }) {
         <Offset height={40} color={"brand-white"} />
         <div>
           <TopBar titleHeader={"Abstract"} />
-          <p className={"mt-4 text-xl text-black/70"}>
-            Updated {cleanAbstract}
-          </p>
+          <p className={"mt-4 text-xl text-black/70"}>{cleanAbstract}</p>
         </div>
       </section>
       <Footer />

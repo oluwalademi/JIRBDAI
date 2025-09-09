@@ -231,4 +231,25 @@
     @apply text-[#161f32] font-inter font-bold text-sm flex items-center justify-start;
   }
 
+
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+    rounded-md border border-transparent
+    px-4 py-2 text-sm font-medium text-white
+    shadow-sm transition-all duration-200
+    hover:shadow-md
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    active:scale-95;
+  }
+
+  .btn-primary-brand {
+    @apply bg-brand-100/50 hover:bg-brand-100/60 active:bg-brand-100/70 focus:ring-brand-100/40;
+  }
+
+  .btn-primary-success {
+    @apply bg-green-500 hover:bg-green-600 active:bg-green-700 focus:ring-green-400;
+  }
 }
