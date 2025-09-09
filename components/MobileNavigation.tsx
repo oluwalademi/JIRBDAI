@@ -23,7 +23,7 @@ const MobileNavigation = () => {
   return (
     <header
       className={
-        "mobile-header flex h-20 flex-row justify-between fill-white px-20 sm:hidden mol:px-10"
+        "mobile-header flex h-20 flex-row justify-between fill-white px-14 sm:hidden mol:px-10"
       }
     >
       <Link href="/" passHref legacyBehavior>

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
       <div className={"h-12"} />
-      <footer className="flex flex-row items-center justify-between border-t border-black px-16 py-10">
+      <footer className="flex flex-row items-center justify-between border-t border-black px-8 py-10">
         {/* Left: Text container */}
         <div className="flex flex-1 flex-col gap-1">
           <div className="text-left font-robotoflex text-base font-semibold text-[#4d4d4f]">

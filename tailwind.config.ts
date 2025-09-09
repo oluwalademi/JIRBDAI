@@ -116,10 +116,20 @@ const config: Config = {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        pulseOnce: {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.05)" },
+        },
+        attention: {
+          "0%, 100%": { transform: "scale(1)", color: "black" },
+          "50%": { transform: "scale(1.05)", color: "#4338ca" }, // indigo-600
+        },
       },
       animation: {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         scrollX: "scrollX 20s linear infinite",
+        pulseOnce: "pulseOnce 2s ease-in-out infinite",
+        attention: "attention 1.5s ease-in-out infinite",
       },
       textIndent: {
         sm: "1rem",

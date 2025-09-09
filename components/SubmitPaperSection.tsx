@@ -69,8 +69,17 @@ export default function SubmitPaperSection() {
         <h2 className="font-inter text-sm font-extrabold text-black">
           Empowering your Publication Journey
         </h2>
-        <a href={"https://jirbdai.com.ng/index.php/jirbdai/about/submissions"}>
-          <h1 className="h1 leading-tight text-black">Submit Your Paper</h1>
+        <a
+          href="https://jirbdai.com.ng/index.php/jirbdai/about/submissions"
+          className="inline-block"
+        >
+          <h1
+            className="h1 animate-attention cursor-pointer leading-tight text-black
+               underline-offset-4 hover:text-indigo-600
+               hover:underline"
+          >
+            Submit Your Paper
+          </h1>
         </a>
       </div>
 

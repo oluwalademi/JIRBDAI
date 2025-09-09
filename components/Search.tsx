@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 interface SearchProps {
   onUserActive: (active: boolean) => void;
@@ -12,6 +12,7 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ onUserActive }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const searchPhrase = searchParams.get("searchPhrase") || "";
 
   const [startedTyping, setStartedTyping] = useState(false);
@@ -19,13 +20,21 @@ const Search: React.FC<SearchProps> = ({ onUserActive }) => {
 
   const handleClick = (takeText: string) => {
     const params = new URLSearchParams(searchParams.toString());
+
     if (!takeText.trim()) {
       params.delete("searchPhrase");
     } else {
       params.set("searchPhrase", takeText);
     }
 
-    router.push(`?${params.toString()}`);
+    const newQuery = `?${params.toString()}`;
+
+    // ✅ If not already on /browse, go there with params
+    if (pathname !== "/browse") {
+      router.push(`/browse${newQuery}`);
+    } else {
+      router.push(newQuery);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +74,7 @@ const Search: React.FC<SearchProps> = ({ onUserActive }) => {
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onKeyDown={handleKeyDown} // ✅ Trigger search on Enter
+          onKeyDown={handleKeyDown}
           className="h-[52px] bg-[#2c526f] px-6 pr-10 text-white placeholder:text-white/40"
         />
         <Image
